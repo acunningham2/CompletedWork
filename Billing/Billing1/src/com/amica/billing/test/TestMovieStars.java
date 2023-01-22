@@ -1,9 +1,18 @@
 package com.amica.billing.test;
 
+import com.amica.billing.Customer;
+import com.amica.billing.Invoice;
+import com.amica.billing.Terms;
+import com.amica.billing.parse.FlatParser;
+import com.amica.billing.parse.Parser;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Test program that asks a {@link Billing} to load flat-format data and produce
@@ -33,7 +42,7 @@ public class TestMovieStars {
 
 	public static void testParser() {
 		System.out.println("Testing the parser ...");
-		/*
+
 		Parser parser = new FlatParser();
 		Stream<String> customerData = Stream.of(
 				"Myrna       Loy         CREDIT_60 ",
@@ -52,8 +61,8 @@ public class TestMovieStars {
 		customerMap.put(customer.getName(), customer);
 		Stream<Invoice> invoices = parser.parseInvoices(invoiceData, customerMap);
 		assertThat(invoices.anyMatch(inv -> inv.getNumber() == 505),
-				"There shuld be an invoice with the number 505.");
-		*/
+				"There should be an invoice with the number 505.");
+
 		System.out.println();
 	}
 	
@@ -101,9 +110,9 @@ public class TestMovieStars {
 		try {
 			// This sets up data files just for this test, fresh copy each time,
 			// and assures that the folders are in place to hold reports:
-			Files.copy(Paths.get("data/customers.flat"), Paths.get(CUSTOMERS_FILENAME),
+			Files.copy(Paths.get("Billing/Billing1/data/customers.flat"), Paths.get(CUSTOMERS_FILENAME),
 					StandardCopyOption.REPLACE_EXISTING);
-			Files.copy(Paths.get("data/invoices.flat"), Paths.get(INVOICES_FILENAME),
+			Files.copy(Paths.get("Billing/Billing1/data/invoices.flat"), Paths.get(INVOICES_FILENAME),
 					StandardCopyOption.REPLACE_EXISTING);
 			Files.createDirectories(Paths.get(OUTPUT_FOLDER));
 			

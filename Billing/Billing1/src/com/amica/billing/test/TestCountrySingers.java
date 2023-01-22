@@ -1,9 +1,18 @@
 package com.amica.billing.test;
 
+import com.amica.billing.*;
+import com.amica.billing.parse.CSVParser;
+import com.amica.billing.parse.Parser;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Test program that asks a {@link Billing} to load CSV data and produce
@@ -14,10 +23,10 @@ import java.nio.file.StandardCopyOption;
 public class TestCountrySingers {
 
 	public static final String CUSTOMERS_FILENAME = 
-			"data/country_singers/customers.csv";
+			"Billing/Billing1/data/customers.csv";
 	public static final String INVOICES_FILENAME = 
-			"data/country_singers/invoices.csv";
-	public static final String OUTPUT_FOLDER = "reports/country_singers";
+			"Billing/Billing1/data/invoices.csv";
+	public static final String OUTPUT_FOLDER = "Billing/Billing1/data/country_singers";
 	
 	public static void assertThat(boolean condition, String error) {
 		if (!condition) {
@@ -33,7 +42,7 @@ public class TestCountrySingers {
 
 	public static void testParser() {
 		System.out.println("Testing the parser ...");
-		/*
+
 		Parser parser = new CSVParser();
 		Stream<String> customerData = Stream.of(
 				"Jerry,Reed,30",
@@ -52,14 +61,14 @@ public class TestCountrySingers {
 		customerMap.put(customer.getName(), customer);
 		Stream<Invoice> invoices = parser.parseInvoices(invoiceData, customerMap);
 		assertThat(invoices.anyMatch(inv -> inv.getNumber() == 106),
-				"There shuld be an invoice with the number 106.");
-		*/
+				"There should be an invoice with the number 106.");
+
 		System.out.println();
 	}
 	
-	public static void testBilling() {
+	public static void testBilling() throws FileNotFoundException {
 		System.out.println("Testing the Billing object ...");
-		/*
+
 		final String EXPECTED_CUSTOMER = "Jerry Reed";
 		Billing billing = new Billing(CUSTOMERS_FILENAME, INVOICES_FILENAME);
 		Map<String,Customer> customers = billing.getCustomers();
@@ -70,15 +79,15 @@ public class TestCountrySingers {
 		
 		assertEqual(customers.get(EXPECTED_CUSTOMER).getTerms(), Terms.CREDIT_30, 
 				"Jerry Reed's payment terms should be CREDIT_30, was %s.");
-		*/
+
 		System.out.println();
 	}
 	
-	public static void testReporter() {
+	public static void testReporter() throws FileNotFoundException {
 		System.out.println("Testing the Reporter object ...");
 		System.out.println();
 		
-		/*
+
 		Billing billing = new Billing(CUSTOMERS_FILENAME, INVOICES_FILENAME);
 		Reporter reporter = new Reporter
 				(billing, OUTPUT_FOLDER, LocalDate.of(2021, 12, 1));
@@ -88,23 +97,23 @@ public class TestCountrySingers {
 		reporter.reportOverdueInvoices();
 		reporter.reportCustomersAndVolume();
 
-		billing.createCustomer("Merle", "Haggard", Terms.CASH);		
-		billing.createInvoice("Merle Haggard", 100);
-		billing.createInvoice("John Hiatt", 999);
-		billing.payInvoice(107);
-		*/
+		//billing.createCustomer("Merle", "Haggard", Terms.CASH);
+		//billing.createInvoice("Merle Haggard", 100);
+		//billing.createInvoice("John Hiatt", 999);
+		//billing.payInvoice(107);
+
 	}
 	
 	public static void main(String[] args) {
 		
-		File workspace = new File("data/country_singers");
+		File workspace = new File("Billing/Billing1/data/country_singers");
 		workspace.mkdir();
 		try {
 			// This sets up data files just for this test, fresh copy each time,
 			// and assures that the folders are in place to hold reports:
-			Files.copy(Paths.get("data/customers.csv"), Paths.get(CUSTOMERS_FILENAME),
+			Files.copy(Paths.get("Billing/Billing1/data/customers.csv"), Paths.get(CUSTOMERS_FILENAME),
 					StandardCopyOption.REPLACE_EXISTING);
-			Files.copy(Paths.get("data/invoices.csv"), Paths.get(INVOICES_FILENAME),
+			Files.copy(Paths.get("Billing/Billing1/data/invoices.csv"), Paths.get(INVOICES_FILENAME),
 					StandardCopyOption.REPLACE_EXISTING);
 			Files.createDirectories(Paths.get(OUTPUT_FOLDER));
 			
