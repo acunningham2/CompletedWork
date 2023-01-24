@@ -1,0 +1,12 @@
+com\amica\help\Tag.class
+com\amica\help\Event.class
+com\amica\help\ReopenedTicket.class
+com\amica\help\Ticket$Priority.class
+com\amica\help\Ticket.class
+com\amica\help\HelpDeskAPI.class
+com\amica\help\Ticket$Status.class
+com\amica\help\Clock.class
+com\amica\help\TestProgram.class
+com\amica\help\HelpDesk.class
+com\amica\help\Tags.class
+com\amica\help\Technician.class
