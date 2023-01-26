@@ -1,9 +1,11 @@
 package com.amica.billing;
 
-import static com.amica.HasKeys.hasKeys;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.amica.billing.parse.CSVParser;
+import com.amica.billing.parse.CSVParserTest;
+import com.amica.billing.parse.Parser;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,12 +18,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import com.amica.billing.parse.CSVParser;
-import com.amica.billing.parse.CSVParserTest;
-import com.amica.billing.parse.Parser;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import static com.amica.HasKeys.hasKeys;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This class gathers various constants, data sets, and utility methods 

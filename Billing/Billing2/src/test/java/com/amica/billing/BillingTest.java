@@ -1,8 +1,8 @@
 package com.amica.billing;
 
-import static com.amica.billing.TestUtility.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,9 +15,9 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import static com.amica.billing.TestUtility.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsStringIgnoringCase;
 
 /**
  * Unit test for the {@link Billing} class.
@@ -112,7 +112,7 @@ public class BillingTest {
 		billing.createInvoice("Adam C", 1200);
 		billing.payInvoice(7);
 		try (Stream<String> lines = Files.lines(Path.of(TEMP_FOLDER + "/" + INVOICES_FILENAME))) {
-			assertThat(lines.collect(Collectors.joining("\n")), containsStringIgnoringCase("7,Adam,C,1200.00,2023-01-25,2023-01-25"));
+			assertThat(lines.map(s -> s.split("\n")).forEach(strings -> strings)), containsStringIgnoringCase("7,Adam,C,1200.00,2023-01-25,2023-01-25"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

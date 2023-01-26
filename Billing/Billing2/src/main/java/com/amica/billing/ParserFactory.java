@@ -1,12 +1,12 @@
 package com.amica.billing;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.amica.billing.parse.CSVParser;
 import com.amica.billing.parse.FlatParser;
 import com.amica.billing.parse.Parser;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * A factory for parsers that determines which type of parser to create
@@ -59,7 +59,7 @@ public class ParserFactory {
 		if (filename != null) {
 			int index = filename.indexOf(".");
 			if (index  != -1 && index != filename.length() - 1) {
-				String extension = filename.substring(index + 1);
+				String extension = filename.substring(index + 1).toLowerCase();
 				if (parsers.containsKey(extension)) {
 					return parsers.get(extension).get();
 				}

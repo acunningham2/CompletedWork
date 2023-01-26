@@ -1,7 +1,5 @@
 package com.amica.billing.parse;
 
-import static com.amica.billing.TestUtility.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
