@@ -1,0 +1,39 @@
+Add this above the existing spring-data dependency:
+      <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.5.4</version>
+    </dependency>
+
+Add this at the bottom of the dependency list:
+    <dependency>
+      <groupId>com.amica.escm</groupId>
+      <artifactId>mvc-exception-handlers</artifactId>
+      <version>0.1.8</version>
+    </dependency>
+
+Add this after the </dependencies> tag and before <profiles>:
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.7</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <phase>prepare-package</phase>
+              <goals>
+                <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
